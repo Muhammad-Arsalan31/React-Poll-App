@@ -1,15 +1,16 @@
 import React from "react";
-import { Header } from "./components/Header";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Home } from "./components/Home";
+import { AddNewPoll } from "./components/AddNewPoll";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Navbar />
-      <Footer />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/addnewpoll" component={<AddNewPoll />} />
+      </Switch>
+    </Router>
   );
 }
 
