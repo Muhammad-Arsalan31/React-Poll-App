@@ -9,8 +9,8 @@ function App() {
     <Router>
       <Home>
         <Switch>
-          <Route path="/" exact component={Polls} />
-          <Route path="/addnewpoll" component={AddNewPoll} />
+          <Route exact path="/" component={Polls} />
+          <Route path="/addnewpoll" exact component={AddNewPoll} />
         </Switch>
       </Home>
     </Router>
