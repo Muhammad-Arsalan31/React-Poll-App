@@ -3,16 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./components/Home";
 import { AddNewPoll } from "./components/AddNewPoll";
 import { Polls } from "./components/Polls";
+import { PollContextProvider } from "./context/PollContext";
 
 function App() {
   return (
     <Router>
-      <Home>
-        <Switch>
-          <Route exact path="/" component={Polls} />
-          <Route path="/addnewpoll" exact component={AddNewPoll} />
-        </Switch>
-      </Home>
+      <PollContextProvider>
+        <Home>
+          <Switch>
+            <Route exact path="/" component={Polls} />
+            <Route path="/addnewpoll" exact component={AddNewPoll} />
+          </Switch>
+        </Home>
+      </PollContextProvider>
     </Router>
   );
 }
