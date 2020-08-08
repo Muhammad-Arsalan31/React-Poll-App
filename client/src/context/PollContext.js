@@ -4,24 +4,7 @@ import PollReducer from "./PollReducer";
 export const PollContext = createContext();
 
 const initialState = {
-  polls: [
-    {
-      id: 1,
-      question: "Which programming language runs in browser?",
-      answerA: "Javascript",
-      answerB: "Python",
-      voteA: 33,
-      voteB: 22,
-    },
-    {
-      id: 2,
-      question: "Which programming language runs on backend ?",
-      answerA: "Javascript",
-      answerB: "Python",
-      voteA: 33,
-      voteB: 22,
-    },
-  ],
+  polls: [],
   errors: null,
   loading: true,
 };
@@ -29,6 +12,7 @@ const initialState = {
 export const PollContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(PollReducer, initialState);
   const addPoll = (poll) => {
+    console.log(poll);
     dispatch({
       type: "ADD_POLL",
       payload: poll,
@@ -37,9 +21,9 @@ export const PollContextProvider = ({ children }) => {
   const handleVote = (option, id) => {
     let copiedPolls = [...state.polls];
     let upvotedPoll = copiedPolls.find((poll) => poll.id === id);
-    console.log(option, id);
     if (option === "a") {
       upvotedPoll.voteA++;
+      console.log(upvotedPoll, copiedPolls);
     }
     if (option === "b") {
       upvotedPoll.voteB++;
@@ -49,8 +33,16 @@ export const PollContextProvider = ({ children }) => {
       payload: copiedPolls,
     });
   };
+  const removePoll = (id) => {
+    dispatch({
+      type: "REMOVE_POLL",
+      payload: id,
+    });
+  };
   return (
-    <PollContext.Provider value={{ polls: state.polls, addPoll, handleVote }}>
+    <PollContext.Provider
+      value={{ polls: state.polls, addPoll, handleVote, removePoll }}
+    >
       {children}
     </PollContext.Provider>
   );
